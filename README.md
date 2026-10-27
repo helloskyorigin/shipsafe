@@ -15,9 +15,9 @@ This repository currently contains the **landing page** in a lightweight, depend
 
 Run a static server from the repository root:
 
-\`\`\`sh
+```sh
 python3 -m http.server 4173
-\`\`\`
+```
 
 Visit http://localhost:4173.
 
