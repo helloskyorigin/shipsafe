@@ -37,3 +37,67 @@ body{overflow-x:clip}.hero-grid{display:grid;grid-template-columns:.9fr 1.1fr;al
 @media(max-width:640px){.container{width:calc(100% - 40px)}.header{height:68px}.header.scrolled{height:68px}.brand{font-size:23px}.top-cta{display:none}.menu-toggle{margin-left:auto}.hero{padding:54px 0 59px}.hero-grid{gap:29px}.eyebrow{font-size:9px;letter-spacing:.16em}.hero-text h1{font-size:clamp(42px,10.3vw,59px);margin:19px 0}.hero-sub{font-size:14px;line-height:1.8}.hero-action{margin-top:18px}.button-primary{font-size:13px;min-height:50px}.under-cta{justify-content:center;font-size:11px;line-height:1.8}.preview-wrap{padding:6px 0 24px}.preview{border-radius:13px}.preview-top{height:42px;padding:0 13px}.preview-body{padding:14px 12px}.preview-heading{margin-bottom:15px}.preview-overline{font-size:7px}.preview-heading h2{font-size:16px}.preview-heading p{font-size:9px}.complete-tag{font-size:8px;padding:6px 8px}.severity-grid{gap:6px;margin-bottom:20px}.severity{min-height:73px;padding:9px 7px;border-radius:8px}.severity-name{font-size:9px;gap:5px}.severity-name i{height:6px;width:6px}.severity strong{font-size:21px;margin-top:7px}.finding{padding:10px 8px;gap:8px}.finding-symbol{width:27px;height:27px;font-size:13px}.finding-copy strong{font-size:10px}.finding-copy small{font-size:8.5px}.pill{font-size:8px;padding:5px 7px}.floating-label{right:-5px;bottom:2px;font-size:9px;padding:8px 10px}.section{padding:67px 0}.section-heading h2,.split-heading h2,.pricing-intro h2,.faq-section h2{font-size:clamp(31px,8vw,39px)}.section-heading>p:last-child{font-size:13px}.steps{grid-template-columns:1fr;gap:30px;margin-top:32px}.step{display:grid;grid-template-columns:52px 1fr;column-gap:16px}.step-head{grid-row:span 2;display:flex;flex-direction:column;align-items:center;gap:8px;margin:0}.step-icon,.trust-icon{height:47px;width:47px}.step-head>span{font-size:9px}.step h3{padding-top:3px;margin-bottom:6px}.step p{max-width:420px}.trust-grid{grid-template-columns:1fr;gap:25px;margin-top:33px}.trust-item{padding:0 0 24px!important;border-right:0!important;border-bottom:1px solid #e6eaf0}.trust-item:last-child{border:0;padding-bottom:0!important}.trust-icon{margin-bottom:14px}.trust-item h3{margin-bottom:6px}.trust-item p{max-width:480px}.pricing-grid,.faq-grid{grid-template-columns:1fr;gap:28px}.features{grid-template-columns:1fr 1fr;gap:13px 8px}.features li{font-size:10px}.price-top h3{font-size:15px}.price{font-size:30px}.footer-main{flex-direction:column;gap:25px;padding:37px 0 29px}.footer-main nav{gap:19px}}
 @media(max-width:370px){.container{width:calc(100% - 28px)}.hero-text h1{font-size:41px}.preview-body{padding:12px 8px}.severity{padding:8px 5px}.severity-name{font-size:8px}.severity strong{font-size:19px}.finding{gap:6px}.finding-copy strong{font-size:9px}.finding-copy small{font-size:8px}.floating-label{display:none}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.animate,.reveal{opacity:1!important;transform:none!important}.preview{transform:none!important}}
+/* Mobile rendering reliability: no content is hidden while waiting for animations.
+   Decorative motion uses transforms only, so preview tools cannot leave sections blank. */
+.animate,.reveal,.reveal.visible{
+  opacity:1;
+  transform:none;
+}
+.animate{animation:ship-enter .68s cubic-bezier(.2,.75,.2,1) both}
+@keyframes ship-enter {
+  from{transform:translateY(14px)}
+  to{transform:translateY(0)}
+}
+.reveal.visible{animation:ship-enter .5s cubic-bezier(.2,.75,.2,1) both}
+/* Keep iconography legible in embedded previews where SVG strokes may disappear. */
+.step-icon svg,.trust-icon svg{display:none}
+.step-icon,.trust-icon{position:relative}
+.step-icon::before,.trust-icon::before{
+ display:block;color:#38669d;
+ font-family:Inter,system-ui,-apple-system,sans-serif;
+ font-weight:600;font-size:25px;line-height:1;
+}
+.step:nth-child(1) .step-icon::before{content:"⌁";font-size:31px}
+.step:nth-child(2) .step-icon::before{content:"▤";font-size:25px}
+.step:nth-child(3) .step-icon::before{content:"◇";font-size:29px}
+.trust-item:nth-child(1) .trust-icon::before{content:"⬡";font-size:26px}
+.trust-item:nth-child(2) .trust-icon::before{content:"▤";font-size:25px}
+.trust-item:nth-child(3) .trust-icon::before{content:"◇";font-size:29px}
+/* Page content must never be constrained to a fraction of mobile width. */
+@media(max-width:850px){
+  .split-heading{display:flex;flex-direction:column;align-items:stretch}
+  .split-heading>p{display:block;width:100%;max-width:100%;flex:0 0 auto;margin:0}
+}
+@media(max-width:640px){
+  .hero{padding:34px 0 47px}
+  .hero-grid{gap:22px}
+  .hero-text{width:100%}
+  .hero-text h1{font-size:clamp(38px,10.2vw,51px);line-height:1.12}
+  .hero-sub{max-width:36ch}
+  .hero-action{width:100%}
+  .preview-wrap{max-width:100%;padding:4px 0 15px}
+  .floating-label{display:none}
+  .section{padding:54px 0}
+  .steps{margin-top:25px;gap:26px}
+  #how .step{display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:15px;align-items:start}
+  #how .step .step-head{grid-column:1;grid-row:1 / span 2;align-items:center;margin:0}
+  #how .step h3{grid-column:2;grid-row:1;margin-top:0;margin-bottom:4px;padding-top:0}
+  #how .step p{grid-column:2;grid-row:2;min-width:0;max-width:100%;line-height:1.65}
+  .split-heading>p{width:100%;max-width:none!important;line-height:1.75}
+  .trust-grid{gap:19px;margin-top:26px}
+  .trust-item{padding-bottom:17px!important}
+  .trust-item .trust-icon{margin-bottom:11px}
+  .pricing-grid,.faq-grid{gap:24px}
+}
+@media(max-width:370px){
+ .hero-text h1{font-size:38px}
+ .severity-grid{gap:4px}
+ .severity{padding:7px 4px}
+ .severity-name{font-size:8px;gap:3px}
+ .severity strong{font-size:19px}
+ .finding-copy{min-width:0}
+ .pill{padding:4px 5px}
+}
+@media(prefers-reduced-motion:reduce){
+ .animate,.reveal,.reveal.visible{animation:none!important;opacity:1!important;transform:none!important}
+}
